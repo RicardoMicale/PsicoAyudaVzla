@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_TLS_INSECURE = process.env.MONGODB_TLS_INSECURE === "true";
 
 if (!MONGODB_URI) {
   throw new Error("Missing MONGODB_URI environment variable.");
@@ -29,7 +30,14 @@ export async function connectToDatabase() {
   if (!cached.promise) {
     const connectionOptions: Parameters<typeof mongoose.connect>[1] = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 10000,
     };
+
+    if (MONGODB_TLS_INSECURE) {
+      connectionOptions.tls = true;
+      connectionOptions.tlsAllowInvalidCertificates = true;
+      connectionOptions.tlsAllowInvalidHostnames = true;
+    }
 
     cached.promise = mongoose.connect(MONGODB_URI, connectionOptions);
   }

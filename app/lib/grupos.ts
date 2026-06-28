@@ -23,15 +23,20 @@ export const getStoredGrupos = (): GrupoApoyo[] => {
 // Suscribirse a Grupos de Apoyo
 export const subscribeToGrupos = (callback: (grupos: GrupoApoyo[]) => void) => {
   if (isFirebaseConfigured && db) {
-    return onSnapshot(collection(db, "grupos"), (snapshot) => {
-      const grps: GrupoApoyo[] = [];
-      snapshot.forEach((doc) => {
-        grps.push({ id: doc.id, ...doc.data() } as GrupoApoyo);
-      });
-      callback(grps);
-    }, (error) => {
-      console.error("Error en onSnapshot de grupos reales:", error);
-    });
+    return onSnapshot(
+      collection(db, "grupos"),
+      (snapshot) => {
+        const grps: GrupoApoyo[] = [];
+        snapshot.forEach((doc) => {
+          grps.push({ id: doc.id, ...doc.data() } as GrupoApoyo);
+        });
+        callback(grps);
+      },
+      (error) => {
+        console.error("Error en onSnapshot de grupos reales:", error);
+        callback(getStoredGrupos());
+      }
+    );
   } else {
     // Suscripción Mock
     const grps = getStoredGrupos();
