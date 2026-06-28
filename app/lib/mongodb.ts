@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_TLS_INSECURE = process.env.MONGODB_TLS_INSECURE === "true";
+const mongodbUri = process.env.MONGODB_URI;
+const MONGODB_TLS_INSECURE =
+  process.env.MONGODB_TLS_INSECURE === "true";
 
-if (!MONGODB_URI) {
+if (!mongodbUri) {
   throw new Error("Missing MONGODB_URI environment variable.");
 }
+
+const MONGODB_URI: string = mongodbUri;
 
 type MongooseCache = {
   conn: typeof mongoose | null;
@@ -16,7 +19,10 @@ declare global {
   var mongooseCache: MongooseCache | undefined;
 }
 
-const cached = global.mongooseCache ?? { conn: null, promise: null };
+const cached: MongooseCache = global.mongooseCache ?? {
+  conn: null,
+  promise: null,
+};
 
 if (!global.mongooseCache) {
   global.mongooseCache = cached;
