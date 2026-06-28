@@ -1,7 +1,11 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
+import type { FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import type { Auth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import type { Firestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
+import type { Analytics } from "firebase/analytics";
 import { Voluntario, GrupoApoyo } from "../models";
 
 // Configuración de Firebase del proyecto del usuario
@@ -18,10 +22,10 @@ const firebaseConfig = {
 // Determina si Firebase está configurado adecuadamente
 export const isFirebaseConfigured = true;
 
-export let app: any;
-export let auth: any;
-export let db: any;
-export let analytics: any;
+export let app: FirebaseApp | undefined;
+export let auth: Auth | undefined;
+export let db: Firestore | undefined;
+export let analytics: Analytics | undefined;
 
 try {
   app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);

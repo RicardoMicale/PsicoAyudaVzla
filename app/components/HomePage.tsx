@@ -23,7 +23,7 @@ export default function HomePage({ children }: HomePageProps) {
   const pathname = usePathname();
   const router = useRouter();
   
-  const { voluntarios, grupos, isAuthModalOpen, setIsAuthModalOpen } = useApp();
+  const { voluntarios, grupos, isVolunteerModalOpen, setIsVolunteerModalOpen } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const guardiasActivas = voluntarios.filter(v => v.guardiaActiva && v.autorizado);
@@ -148,10 +148,10 @@ export default function HomePage({ children }: HomePageProps) {
         onClose={() => setIsMobileMenuOpen(false)}
       />
 
-      {/* 5. VOLUNTEER AUTHENTICATION MODAL */}
+      {/* 5. VOLUNTEER REGISTRATION MODAL */}
       <VolunteerModal 
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        isOpen={isVolunteerModalOpen}
+        onClose={() => setIsVolunteerModalOpen(false)}
       />
 
     </div>

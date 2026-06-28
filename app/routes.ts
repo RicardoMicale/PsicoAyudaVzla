@@ -6,7 +6,7 @@ import { NavigationItem } from "./models";
 
 export interface RouteItem extends Omit<NavigationItem, "icon"> {
   path: string;
-  icon: any;
+  icon: NavigationItem["icon"];
 }
 
 export const getNavigationItems = (hasActiveGuard: boolean, groupCount: number): RouteItem[] => [
