@@ -16,20 +16,24 @@ export interface GrupoApoyo {
   id: string;
   nombre: string;
   descripcion: string;
-  modalidad: "online" | "presencial";
-  lugarOrEnlace: string;
-  horario: string;
-  facilitador: string;
+  modalidad: "online" | "presencial" | 'mixto';
+  enlace: string;
+  dia: string;
+  hora: string;
+  coordinador: string;
+  ubicacion: string;
+  telefono: string;
+  email: string;
 }
 
-export type SectionType = 
-  | "guardia" 
-  | "directorio" 
-  | "grupos" 
-  | "diagnostico" 
-  | "reacciones" 
-  | "alertas" 
-  | "duelo" 
+export type SectionType =
+  | "guardia"
+  | "directorio"
+  | "grupos"
+  | "diagnostico"
+  | "reacciones"
+  | "alertas"
+  | "duelo"
   | "habitos";
 
 export interface NavigationItem {

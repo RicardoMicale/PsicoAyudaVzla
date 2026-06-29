@@ -1,41 +1,66 @@
-import { collection, onSnapshot } from "firebase/firestore";
-import { db, isFirebaseConfigured, DEFAULT_GRUPOS } from "./firebase";
 import { GrupoApoyo } from "../models";
+import { normalizeName } from "./utils";
 
-// ==========================================
-// MOCK STORAGE GETTER (Grupos)
-// ==========================================
+export const getGrupos = async () => {
+  const response = await fetch("/api/grupos", {
+    method: "GET",
+    cache: "no-store",
+  });
 
-export const getStoredGrupos = (): GrupoApoyo[] => {
-  if (typeof window === "undefined") return DEFAULT_GRUPOS;
-  const stored = localStorage.getItem("psicoayuda_grupos");
-  if (!stored) {
-    localStorage.setItem("psicoayuda_grupos", JSON.stringify(DEFAULT_GRUPOS));
-    return DEFAULT_GRUPOS;
+  const payload = (await response.json()) as GrupoApoyo[] | { message?: string };
+
+  if (!response.ok) {
+    throw new Error(
+      "message" in payload && payload.message
+        ? payload.message
+        : "No se pudieron cargar los voluntarios."
+    );
   }
-  return JSON.parse(stored);
-};
 
-// ==========================================
-// DB OPERATIONS
-// ==========================================
+  return payload as GrupoApoyo[];
+}
 
-// Suscribirse a Grupos de Apoyo
-export const subscribeToGrupos = (callback: (grupos: GrupoApoyo[]) => void) => {
-  if (isFirebaseConfigured && db) {
-    return onSnapshot(collection(db, "grupos"), (snapshot) => {
-      const grps: GrupoApoyo[] = [];
-      snapshot.forEach((doc) => {
-        grps.push({ id: doc.id, ...doc.data() } as GrupoApoyo);
-      });
-      callback(grps);
-    }, (error) => {
-      console.error("Error en onSnapshot de grupos reales:", error);
-    });
-  } else {
-    // Suscripción Mock
-    const grps = getStoredGrupos();
-    callback(grps);
-    return () => {};
+
+export const registerGrupoApoyo = async (
+  nombre: string,
+  telefono: string,
+  modalidad: string,
+  email: string,
+  dia: string,
+  hora: string,
+  descripcion: string,
+  enlace: string = "",
+  coordinador: string = "",
+  ubicacion: string = ""
+): Promise<GrupoApoyo> => {
+  const response = await fetch("/api/grupos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nombre: normalizeName(nombre),
+      telefono: telefono.trim(),
+      modalidad: normalizeName(modalidad),
+      email: email.trim().toLowerCase(),
+      dia: normalizeName(dia),
+      hora: normalizeName(hora),
+      descripcion: normalizeName(descripcion),
+      enlace: normalizeName(enlace),
+      coordinador: normalizeName(coordinador),
+      ubicacion: normalizeName(ubicacion)
+    }),
+  });
+
+  const payload = (await response.json()) as GrupoApoyo | { message?: string };
+
+  if (!response.ok) {
+    throw new Error(
+      "message" in payload && payload.message
+        ? payload.message
+        : "No se pudo registrar el grupo de apoyo."
+    );
   }
-};
+
+  return payload as GrupoApoyo;
+}

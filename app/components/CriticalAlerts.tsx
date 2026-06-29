@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AlertTriangle, X, ShieldAlert } from "lucide-react";
+import { X, ShieldAlert } from "lucide-react";
 import contentData from "../data/content.json";
 
 export default function CriticalAlerts() {

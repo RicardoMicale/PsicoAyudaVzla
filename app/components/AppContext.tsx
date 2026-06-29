@@ -1,17 +1,19 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { subscribeToVoluntarios } from "../lib/voluntarios";
-import { subscribeToGrupos } from "../lib/grupos";
-import { subscribeToAuth } from "../lib/auth";
+import React, { createContext, startTransition, useContext, useEffect, useState } from "react";
+import { getVoluntarios } from "../lib/voluntarios";
 import { Voluntario, GrupoApoyo } from "../models";
+import { getGrupos } from "../lib/grupos";
 
 interface AppContextType {
   voluntarios: Voluntario[];
   grupos: GrupoApoyo[];
-  currentUser: Voluntario | null;
-  isAuthModalOpen: boolean;
-  setIsAuthModalOpen: (open: boolean) => void;
+  isVolunteerModalOpen: boolean;
+  setIsVolunteerModalOpen: (open: boolean) => void;
+  refreshVoluntarios: () => Promise<void>;
+  isAddGroupModalOpen: boolean;
+  setIsAddGroupModalOpen: (open: boolean) => void;
+  refreshGrupos: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -19,37 +21,68 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [voluntarios, setVoluntarios] = useState<Voluntario[]>([]);
   const [grupos, setGrupos] = useState<GrupoApoyo[]>([]);
-  const [currentUser, setCurrentUser] = useState<Voluntario | null>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const [isAddGroupModalOpen, setIsAddGroupModalOpen] = useState(false);
+
+  const refreshVoluntarios = async () => {
+    try {
+      const data = await getVoluntarios();
+      setVoluntarios(data);
+    } catch (error) {
+      console.error("Error al cargar voluntarios:", error);
+      setVoluntarios([]);
+    }
+  };
+
+  const refreshGrupos = async () => {
+    try {
+      const data = await getGrupos()
+      setGrupos(data)
+    } catch (error) {
+      console.error("Error al cargar grupos:", error);
+      setGrupos([])
+    }
+  }
 
   useEffect(() => {
-    const unsubVols = subscribeToVoluntarios((data) => {
-      setVoluntarios(data);
-    });
-    
-    const unsubGrupos = subscribeToGrupos((data) => {
-      setGrupos(data);
-    });
+    void getVoluntarios()
+      .then((data) => {
+        startTransition(() => {
+          setVoluntarios(data);
+        });
+      })
+      .catch((error) => {
+        console.error("Error al cargar voluntarios:", error);
+        startTransition(() => {
+          setVoluntarios([]);
+        });
+      });
 
-    const unsubAuth = subscribeToAuth((user) => {
-      setCurrentUser(user);
-    });
-
-    return () => {
-      unsubVols();
-      unsubGrupos();
-      unsubAuth();
-    };
+    void getGrupos().then((data) => {
+      startTransition(() => {
+        setGrupos(data)
+      })
+    }).catch((error) => {
+      console.error("Error al cargar grupos:", error);
+      startTransition(() => {
+        setGrupos([])
+      })
+    })
   }, []);
 
   return (
-    <AppContext.Provider value={{
-      voluntarios,
-      grupos,
-      currentUser,
-      isAuthModalOpen,
-      setIsAuthModalOpen
-    }}>
+    <AppContext.Provider
+      value={{
+        voluntarios,
+        grupos,
+        isVolunteerModalOpen,
+        setIsVolunteerModalOpen,
+        refreshVoluntarios,
+        isAddGroupModalOpen,
+        setIsAddGroupModalOpen,
+        refreshGrupos
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
