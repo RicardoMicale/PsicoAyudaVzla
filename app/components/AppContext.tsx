@@ -2,8 +2,8 @@
 
 import React, { createContext, startTransition, useContext, useEffect, useState } from "react";
 import { getVoluntarios } from "../lib/voluntarios";
-import { subscribeToGrupos } from "../lib/grupos";
 import { Voluntario, GrupoApoyo } from "../models";
+import { getGrupos } from "../lib/grupos";
 
 interface AppContextType {
   voluntarios: Voluntario[];
@@ -11,6 +11,9 @@ interface AppContextType {
   isVolunteerModalOpen: boolean;
   setIsVolunteerModalOpen: (open: boolean) => void;
   refreshVoluntarios: () => Promise<void>;
+  isAddGroupModalOpen: boolean;
+  setIsAddGroupModalOpen: (open: boolean) => void;
+  refreshGrupos: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -19,6 +22,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [voluntarios, setVoluntarios] = useState<Voluntario[]>([]);
   const [grupos, setGrupos] = useState<GrupoApoyo[]>([]);
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const [isAddGroupModalOpen, setIsAddGroupModalOpen] = useState(false);
 
   const refreshVoluntarios = async () => {
     try {
@@ -29,6 +33,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setVoluntarios([]);
     }
   };
+
+  const refreshGrupos = async () => {
+    try {
+      const data = await getGrupos()
+      setGrupos(data)
+    } catch (error) {
+      console.error("Error al cargar grupos:", error);
+      setGrupos([])
+    }
+  }
 
   useEffect(() => {
     void getVoluntarios()
@@ -44,13 +58,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         });
       });
 
-    const unsubGrupos = subscribeToGrupos((data) => {
-      setGrupos(data);
-    });
-
-    return () => {
-      unsubGrupos();
-    };
+    void getGrupos().then((data) => {
+      startTransition(() => {
+        setGrupos(data)
+      })
+    }).catch((error) => {
+      console.error("Error al cargar grupos:", error);
+      startTransition(() => {
+        setGrupos([])
+      })
+    })
   }, []);
 
   return (
@@ -61,6 +78,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         isVolunteerModalOpen,
         setIsVolunteerModalOpen,
         refreshVoluntarios,
+        isAddGroupModalOpen,
+        setIsAddGroupModalOpen,
+        refreshGrupos
       }}
     >
       {children}

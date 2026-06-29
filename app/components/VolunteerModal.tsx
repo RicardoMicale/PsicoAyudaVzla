@@ -37,6 +37,8 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (loading) return;
+
     if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp) {
       setError("Por favor, completa todos los campos del registro.");
       return;

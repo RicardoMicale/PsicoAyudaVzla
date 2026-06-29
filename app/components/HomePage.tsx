@@ -14,6 +14,7 @@ import Sidebar from "./Sidebar";
 import BottomNav from "./BottomNav";
 import MobileDrawer from "./MobileDrawer";
 import VolunteerModal from "./VolunteerModal";
+import AddGroupModal from "./AddGroupModal";
 
 interface HomePageProps {
   children: React.ReactNode;
@@ -22,13 +23,13 @@ interface HomePageProps {
 export default function HomePage({ children }: HomePageProps) {
   const pathname = usePathname();
   const router = useRouter();
-  
-  const { voluntarios, grupos, isVolunteerModalOpen, setIsVolunteerModalOpen } = useApp();
+
+  const { voluntarios, grupos, isVolunteerModalOpen, setIsVolunteerModalOpen, isAddGroupModalOpen, setIsAddGroupModalOpen } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const guardiasActivas = voluntarios.filter(v => v.guardiaActiva && v.autorizado);
   const hasActiveGuard = guardiasActivas.length > 0;
-  
+
   const navigationItems = getNavigationItems(hasActiveGuard, grupos.length);
   // Find current tab details based on path
   const activeTabDetails = navigationItems.find(item => item.path === pathname) || navigationItems[0];
@@ -87,13 +88,13 @@ export default function HomePage({ children }: HomePageProps) {
 
   return (
     <div className="flex flex-1 min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      
+
       {/* 1. DESKTOP SIDEBAR */}
       <Sidebar />
 
       {/* 2. MAIN CONTAINER */}
       <div className="flex-1 flex flex-col md:pl-80 pb-20 md:pb-6">
-        
+
         {/* Emergency Alert Banner */}
         <EmergencyBanner
           bannerText={content.general.emergencyBanner.text}
@@ -106,17 +107,10 @@ export default function HomePage({ children }: HomePageProps) {
 
         {/* Central Content Area */}
         <main className="max-w-5xl w-full mx-auto px-4 py-6 flex-1 flex flex-col">
-          
+
           {/* Header Title & Intro info */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">
-              <span>Sección Activa</span>
-              <span className="h-1 w-1 bg-slate-300 rounded-full" />
-              <span className="text-emerald-600 dark:text-emerald-400">
-                {activeTabDetails?.label}
-              </span>
-            </div>
-            
+
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight">
               {getSectionTitle()}
             </h2>
@@ -149,9 +143,15 @@ export default function HomePage({ children }: HomePageProps) {
       />
 
       {/* 5. VOLUNTEER REGISTRATION MODAL */}
-      <VolunteerModal 
+      <VolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}
+      />
+
+      {/* 6. ADD GROUP MODAL */}
+      <AddGroupModal
+        isOpen={isAddGroupModalOpen}
+        onClose={() => setIsAddGroupModalOpen(false)}
       />
 
     </div>

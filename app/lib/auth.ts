@@ -1,18 +1,5 @@
-import { Voluntario } from "../models";
-
-const normalizeWhatsApp = (whatsapp: string) => {
-  let cleanWhatsApp = whatsapp.replace(/[+\s-]/g, "");
-  if (!cleanWhatsApp.startsWith("58") && cleanWhatsApp.length > 0) {
-    if (cleanWhatsApp.startsWith("0")) {
-      cleanWhatsApp = "58" + cleanWhatsApp.substring(1);
-    } else {
-      cleanWhatsApp = "58" + cleanWhatsApp;
-    }
-  }
-  return cleanWhatsApp;
-};
-
-const normalizeName = (value: string) => value.trim().replace(/\s+/g, " ");
+import { GrupoApoyo, Voluntario } from "../models";
+import { normalizeName, normalizeWhatsApp } from "./utils";
 
 export const registerVoluntario = async (
   nombre: string,
@@ -49,3 +36,4 @@ export const registerVoluntario = async (
 
   return payload as Voluntario;
 };
+

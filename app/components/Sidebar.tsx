@@ -70,7 +70,6 @@ export default function Sidebar() {
                     {item.badge}
                   </span>
                 )}
-                {item.alert && <span className="h-2 w-2 rounded-full bg-red-500" />}
               </Link>
             );
           })}
