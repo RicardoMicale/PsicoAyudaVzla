@@ -35,6 +35,7 @@ export async function GET() {
         whatsapp: voluntario.whatsapp,
         guardiaActiva: Boolean(voluntario.guardiaActiva),
         autorizado: Boolean(voluntario.autorizado),
+        horarios: voluntario.horarios,
       }))
     );
   } catch (error) {

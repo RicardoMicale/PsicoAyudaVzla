@@ -2,6 +2,7 @@ import React from 'react';
 import { HorarioGuardia } from '../models';
 import GuardShiftInput from './GuardShiftInput';
 import { PlusIcon } from 'lucide-react';
+import contentData from '../data/content.json'
 
 interface GuardSettingsFormProps {
   disponibleGuardia: boolean;
@@ -44,6 +45,7 @@ export default function GuardSettingsForm({
 
       {disponibleGuardia && (
         <div className="grid grid-cols-1 gap-4 mt-4 border-t border-slate-200 pt-4 dark:border-slate-800">
+          <span className='text-xs font-semibold text-slate-700 dark:text-slate-300'>{contentData.general.modalVoluntario.disclaimerGuardias}</span>
           {
             horarioGuardia.map((_, index) => (
               <GuardShiftInput key={index} horarios={horarioGuardia} setHorarios={setHorarioGuardia} index={index} />
