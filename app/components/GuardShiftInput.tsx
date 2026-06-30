@@ -45,11 +45,11 @@ export default function GuardShiftInput({ horarios, setHorarios, index }: GuardS
         <input type="time" value={horarioFin} onChange={(e) => setHorarioFin(e.target.value)} className='w-full rounded-lg border border-slate-200 bg-white pl-3 pr-3 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white' />
       </div>
       <div className='flex justify-end gap-2'>
-        <button className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={removeHorario} type="button">
+        <button className="bg-red-500 hover:bg-red-600 active:bg-red-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={removeHorario} type="button">
           <span className='font-bold text-white'>Eliminar horario</span>
           <TrashIcon className="h-5 w-5" />
         </button>
-        <button className="bg-emerald-500 hover:bg-emerald-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={addHorario} type="button">
+        <button className="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={addHorario} type="button">
           <span className='font-bold text-white'>Agregar horario</span>
           <CheckIcon className="h-5 w-5" />
         </button>
