@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Search, BookOpen, Menu } from "lucide-react";
+import { Activity, Search, BookOpen, Menu, User } from "lucide-react";
 import { useApp } from "./AppContext";
 
 interface BottomNavProps {
@@ -20,8 +20,8 @@ export default function BottomNav({ onMoreClick }: BottomNavProps) {
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900 text-slate-300 border-t border-slate-800 z-40">
       <div className="grid grid-cols-4 items-center h-16">
-        
-        <Link 
+
+        <Link
           href="/"
           className={`flex flex-col items-center justify-center h-full transition-all ${
             pathname === "/" ? "text-emerald-400 font-bold" : "text-slate-400"
@@ -36,20 +36,20 @@ export default function BottomNav({ onMoreClick }: BottomNavProps) {
               </span>
             )}
           </div>
-          <span className="text-[9px] mt-1 tracking-tight">Atención</span>
+          <span className="text-[9px] mt-1 tracking-tight">Guardias</span>
         </Link>
 
-        <Link 
+        <Link
           href="/directorio"
           className={`flex flex-col items-center justify-center h-full transition-all ${
             pathname === "/directorio" ? "text-emerald-400 font-bold" : "text-slate-400"
           }`}
         >
-          <Search className="h-5 w-5" />
-          <span className="text-[9px] mt-1 tracking-tight">Buscar</span>
+          <User className="h-5 w-5" />
+          <span className="text-[9px] mt-1 tracking-tight">Directorio</span>
         </Link>
 
-        <Link 
+        <Link
           href="/diagnostico"
           className={`flex flex-col items-center justify-center h-full transition-all ${
             pathname === "/diagnostico" ? "text-emerald-400 font-bold" : "text-slate-400"
@@ -59,7 +59,7 @@ export default function BottomNav({ onMoreClick }: BottomNavProps) {
           <span className="text-[9px] mt-1 tracking-tight">Guías</span>
         </Link>
 
-        <button 
+        <button
           onClick={onMoreClick}
           className="flex flex-col items-center justify-center h-full text-slate-400"
         >
