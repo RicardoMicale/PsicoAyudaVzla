@@ -1,16 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Globe, PlusIcon } from "lucide-react";
-import { GrupoApoyo } from "../models";
+import { GrupoApoyo, Modalidad } from "../models";
 import { useApp } from "./AppContext";
+import GroupsFilter from "./GroupsFilter";
 
 interface SupportGroupsProps {
   grupos: GrupoApoyo[];
 }
 
 export default function SupportGroups({ grupos }: SupportGroupsProps) {
-  const { setIsAddGroupModalOpen } = useApp()
+  const { setIsAddGroupModalOpen } = useApp();
+  const [grps, setGrps] = useState<GrupoApoyo[]>(grupos);
 
   if (grupos.length === 0) {
     return (
@@ -21,7 +23,7 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
     )
   }
 
-  const getModalidad = (modalidad: 'presencial' | 'online' | 'mixto'): string[] => {
+  const getModalidad = (modalidad: Modalidad): string[] => {
     const mod = modalidad.toLowerCase().trim();
 
     switch (mod) {
@@ -36,7 +38,7 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
     }
   }
 
-  const getUbicacionGrupo = (modalidad: 'presencial' | 'online' | 'mixto', lugar: string, enlace: string): string => {
+  const getUbicacionGrupo = (modalidad: Modalidad, lugar: string, enlace: string): string => {
     switch (modalidad) {
       case 'presencial':
         return lugar;
@@ -71,7 +73,8 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
         Crear grupo
         <PlusIcon className="h-4 w-4" />
       </button>
-      {grupos.map((grp) => (
+      <GroupsFilter grupos={grps} setGrupos={setGrps} originalGrupos={grupos} />
+      {grps.map((grp) => (
         <div
           key={grp.id}
           className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col justify-between hover:scale-[1.01] transition-transform"

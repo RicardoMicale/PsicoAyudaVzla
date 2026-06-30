@@ -26,6 +26,8 @@ export interface GrupoApoyo {
   email: string;
 }
 
+export type Modalidad = 'presencial' | 'online' | 'mixto';
+
 export type SectionType =
   | "guardia"
   | "directorio"
