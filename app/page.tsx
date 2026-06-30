@@ -8,7 +8,7 @@ import ActiveGuards from "./components/ActiveGuards";
 export default function Page() {
   const router = useRouter();
   const { voluntarios } = useApp();
-  
+  //  TODO: filtrar por horarios y dia de la semana
   const guardiasActivas = voluntarios.filter(v => v.guardiaActiva && v.autorizado);
 
   return (

@@ -1,6 +1,12 @@
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
 
+export interface HorarioGuardia {
+  dias: number[];
+  horarioInicio: string;
+  horarioFin: string;
+}
+
 export interface Voluntario {
   id: string;
   nombre: string;
@@ -10,6 +16,7 @@ export interface Voluntario {
   whatsapp: string;
   guardiaActiva: boolean;
   autorizado: boolean;
+  horarios: HorarioGuardia[];
 }
 
 export interface GrupoApoyo {

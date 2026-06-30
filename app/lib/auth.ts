@@ -1,4 +1,4 @@
-import { GrupoApoyo, Voluntario } from "../models";
+import { GrupoApoyo, HorarioGuardia, Voluntario } from "../models";
 import { normalizeName, normalizeWhatsApp } from "./utils";
 
 export const registerVoluntario = async (
@@ -7,7 +7,8 @@ export const registerVoluntario = async (
   email: string,
   especialidad: string,
   telefono: string,
-  whatsapp: string
+  whatsapp: string,
+  horarioGuardia: HorarioGuardia[]
 ): Promise<Voluntario> => {
   const response = await fetch("/api/voluntarios", {
     method: "POST",
@@ -21,6 +22,7 @@ export const registerVoluntario = async (
       especialidad: normalizeName(especialidad),
       telefono: telefono.trim(),
       whatsapp: normalizeWhatsApp(whatsapp.trim()),
+      horarios: horarioGuardia,
     }),
   });
 

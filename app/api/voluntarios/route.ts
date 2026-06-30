@@ -56,6 +56,7 @@ export async function POST(request: Request) {
     const especialidad = normalizeName(String(body.especialidad ?? ""));
     const telefono = String(body.telefono ?? "").trim();
     const whatsapp = normalizeWhatsApp(String(body.whatsapp ?? "").trim());
+    const horarios = (body.horarios ?? []) as { dias: number; horarioInicio: string; horarioFin: string }[];
 
     if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp) {
       return NextResponse.json(
@@ -83,6 +84,7 @@ export async function POST(request: Request) {
       whatsapp,
       guardiaActiva: false,
       autorizado: true,
+      horarios,
     });
 
     return NextResponse.json(
@@ -96,6 +98,7 @@ export async function POST(request: Request) {
         whatsapp: newVoluntario.whatsapp,
         guardiaActiva: newVoluntario.guardiaActiva,
         autorizado: newVoluntario.autorizado,
+        horarios: newVoluntario.horarios,
       },
       { status: 201 }
     );
