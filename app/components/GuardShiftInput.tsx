@@ -28,7 +28,7 @@ export default function GuardShiftInput({ horarios, setHorarios, index }: GuardS
   const diasDeLaSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-4">
       <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">Horario de guardia</label>
       <div className="grid grid-cols-7 gap-2">
         {
@@ -46,11 +46,11 @@ export default function GuardShiftInput({ horarios, setHorarios, index }: GuardS
       </div>
       <div className='flex justify-end gap-2'>
         <button className="bg-red-500 hover:bg-red-600 active:bg-red-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={removeHorario} type="button">
-          <span className='font-bold text-white'>Eliminar horario</span>
+          <span className='font-bold text-white text-xs md:text-base'>Eliminar horario</span>
           <TrashIcon className="h-5 w-5" />
         </button>
         <button className="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-600 text-white p-2 rounded-md flex items-center gap-2 cursor-pointer" onClick={addHorario} type="button">
-          <span className='font-bold text-white'>Agregar horario</span>
+          <span className='font-bold text-white text-xs md:text-base'>Agregar horario</span>
           <CheckIcon className="h-5 w-5" />
         </button>
       </div>
