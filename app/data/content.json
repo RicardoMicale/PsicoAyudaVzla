@@ -12,6 +12,9 @@
       "dashboard": "Panel de Voluntario",
       "logout": "Cerrar Sesión"
     },
+    "modalVoluntario": {
+      "disclaimerGuardias": "Las guardias deben ser en horario Venezuela, si seleccionas una franja horaria deberás cumplir con ella."
+    },
     "footer": {
       "disclaimer": "Aviso Médico Legal: La información y la orientación brindadas en esta plataforma tienen fines educativos y de soporte primario. No reemplazan una terapia psicológica formal ni un tratamiento médico o psiquiátrico de urgencia. Si tu vida corre peligro, acude al centro de salud más cercano o llama a los servicios de emergencia de tu localidad.",
       "credits": "© 2026 PsicoAyudaVenezuela. Desarrollado con vocación de servicio público y apoyo mutuo."

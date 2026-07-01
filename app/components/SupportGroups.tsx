@@ -63,60 +63,59 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn">
+    <>
       <button
-        className="p-3 text-white bg-emerald-600 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-emerald-700 hover:scale-105 cursor-pointer transition-all duration-200"
+        className="p-3 text-white bg-emerald-600 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-emerald-700 hover:scale-105 cursor-pointer transition-all duration-200 mb-6"
         onClick={() => setIsAddGroupModalOpen(true)}
       >
         Crear grupo
         <PlusIcon className="h-4 w-4" />
       </button>
-      {grupos.map((grp) => (
-        <div
-          key={grp.id}
-          className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col justify-between hover:scale-[1.01] transition-transform"
-        >
-          <div className="space-y-4">
-            {/* Modality badge */}
-            <div className="flex flex-row flex-wrap flex-shrink-0 justify-between items-start md:items-center gap-4 md:gap-0">
-              <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
-                getModalidad(grp.modalidad)[1]
-              }`}>
-                <Globe className="h-3.5 w-3.5" />
-                {getModalidad(grp.modalidad)[0]}
-              </span>
-
-              <span className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-                {grp.dia} - {grp.hora}
-              </span>
-            </div>
-
-            <div>
-              <h3 className="font-extrabold text-lg text-slate-950 dark:text-white leading-snug">
-                {grp.nombre}
-              </h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-                {grp.descripcion}
-              </p>
-            </div>
-
-            <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl text-xs space-y-2 border border-slate-100 dark:border-slate-800">
-              <div>
-                <span className="text-slate-400 font-semibold block">Facilitador:</span>
-                <span className="text-slate-800 dark:text-slate-200 font-bold">{grp.coordinador}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn">
+        {grupos.map((grp) => (
+          <div
+            key={grp.id}
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col justify-between hover:scale-[1.01] transition-transform"
+          >
+            <div className="space-y-4">
+              {/* Modality badge */}
+              <div className="flex flex-row flex-wrap flex-shrink-0 justify-between items-start md:items-center gap-4 md:gap-0">
+                <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
+                  getModalidad(grp.modalidad)[1]
+                }`}>
+                  <Globe className="h-3.5 w-3.5" />
+                  {getModalidad(grp.modalidad)[0]}
+                </span>
+                <span className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                  {grp.dia} - {grp.hora}
+                </span>
               </div>
               <div>
-                <span className="text-slate-400 font-semibold block">Lugar / Enlace:</span>
-                <span className="text-slate-800 dark:text-slate-200 font-bold">{getUbicacionGrupo(grp.modalidad, grp.ubicacion, grp.enlace)}</span>
+                <h3 className="font-extrabold text-lg text-slate-950 dark:text-white leading-snug">
+                  {grp.nombre}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                  {grp.descripcion}
+                </p>
               </div>
-              <div>
-                <span className="text-slate-400 font-semibold block">Contacto</span>
-                <span className="text-slate-800 dark:text-slate-200 font-bold">{getContactoGrupo(grp.telefono, grp.email)}</span>
+              <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl text-xs space-y-2 border border-slate-100 dark:border-slate-800">
+                <div>
+                  <span className="text-slate-400 font-semibold block">Facilitador:</span>
+                  <span className="text-slate-800 dark:text-slate-200 font-bold">{grp.coordinador}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-semibold block">Lugar / Enlace:</span>
+                  <span className="text-slate-800 dark:text-slate-200 font-bold">{getUbicacionGrupo(grp.modalidad, grp.ubicacion, grp.enlace)}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-semibold block">Contacto</span>
+                  <span className="text-slate-800 dark:text-slate-200 font-bold">{getContactoGrupo(grp.telefono, grp.email)}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }

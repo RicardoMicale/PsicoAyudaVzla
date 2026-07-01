@@ -4,6 +4,7 @@ import React, { createContext, startTransition, useContext, useEffect, useState 
 import { getVoluntarios } from "../lib/voluntarios";
 import { Voluntario, GrupoApoyo } from "../models";
 import { getGrupos } from "../lib/grupos";
+import { getIsActiveGuard } from "../lib/utils";
 
 interface AppContextType {
   voluntarios: Voluntario[];
@@ -27,7 +28,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const refreshVoluntarios = async () => {
     try {
       const data = await getVoluntarios();
-      setVoluntarios(data);
+
+      const dataActualizada = data.map((v) => ({
+        ...v,
+        guardiaActiva: getIsActiveGuard(v.horarios),
+      }))
+      setVoluntarios(dataActualizada);
     } catch (error) {
       console.error("Error al cargar voluntarios:", error);
       setVoluntarios([]);
@@ -48,7 +54,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     void getVoluntarios()
       .then((data) => {
         startTransition(() => {
-          setVoluntarios(data);
+          setVoluntarios(data.map((v) => ({
+              ...v,
+              guardiaActiva: getIsActiveGuard(v.horarios),
+          })));
         });
       })
       .catch((error) => {
