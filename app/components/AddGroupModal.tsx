@@ -110,8 +110,8 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="col-span-2">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Nombre
                 </label>
@@ -128,7 +128,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Descripción
                 </label>
@@ -144,7 +144,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2 md:col-span-1">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Teléfono
                 </label>
@@ -161,7 +161,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2 md:col-span-1">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Correo electrónico
                 </label>
@@ -178,7 +178,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2 md:col-span-1">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Coordinador
                 </label>
@@ -195,7 +195,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2 md:col-span-1">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Ubicación
                 </label>
@@ -212,7 +212,7 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
+              <div className="col-span-2 md:col-span-1">
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Enlace
                 </label>
@@ -264,25 +264,25 @@ export default function AddGroupModal({ isOpen, onClose }: AddGroupModalProps) {
                 </div>
               </div>
 
-              <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                    Modalidad
-                  </label>
-                  <div className="relative">
-                    <TagsIcon className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
-                    <select
-                      value="desconocida"
-                      onChange={(e) => setModalidad(e.target.value)}
-                      className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
-                      required
-                    >
-                      <option value="desconocida">Selecciona una modalidad</option>
-                      <option value="presencial">Presencial</option>
-                      <option value="online">Online</option>
-                      <option value="mixto">Mixto</option>
-                    </select>
-                  </div>
+              <div className="col-span-2">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  Modalidad
+                </label>
+                <div className="relative">
+                  <TagsIcon className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
+                  <select
+                    value="desconocida"
+                    onChange={(e) => setModalidad(e.target.value)}
+                    className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                    required
+                  >
+                    <option value="desconocida">Selecciona una modalidad</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="online">Online</option>
+                    <option value="mixto">Mixto</option>
+                  </select>
                 </div>
+              </div>
             </div>
 
             <button

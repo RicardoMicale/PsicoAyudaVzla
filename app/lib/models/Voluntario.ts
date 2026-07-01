@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import { horarioGuardiaSchema } from "./HorarioGuardia";
 
 const voluntarioSchema = new Schema(
   {
@@ -10,6 +11,7 @@ const voluntarioSchema = new Schema(
     whatsapp: { type: String, required: true, trim: true },
     guardiaActiva: { type: Boolean, default: false },
     autorizado: { type: Boolean, default: true },
+    horarios: { type: [horarioGuardiaSchema], default: [] },
   },
   {
     timestamps: true,

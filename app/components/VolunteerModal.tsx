@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X } from "lucide-react";
 import { registerVoluntario } from "../lib/auth";
 import { useApp } from "./AppContext";
+import GuardSettingsForm from "./GuardSettingsForm";
+import { HorarioGuardia } from "../models";
 
 interface VolunteerModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
+//  TODO: Agregar checkbox guardia Si/No
+//  TODO: Agregar en caso de guardia Si -> dia y horas de guardia/todos los dias/toda hora ciertos dias
 export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps) {
   const { refreshVoluntarios } = useApp();
   const [nombre, setNombre] = useState("");
@@ -18,6 +21,9 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
   const [especialidad, setEspecialidad] = useState("");
   const [telefono, setTelefono] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+
+  const [disponibleGuardia, setDisponibleGuardia] = useState(false);
+  const [horarioGuardia, setHorarioGuardia] = useState<HorarioGuardia[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +38,8 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setEspecialidad("");
     setTelefono("");
     setWhatsapp("");
+    setHorarioGuardia([]);
+    setDisponibleGuardia(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,7 +56,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setError(null);
 
     try {
-      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp);
+      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, horarioGuardia);
       await refreshVoluntarios();
       setSuccess("Registro completado con exito. Ya quedo guardada la informacion del voluntario.");
       resetForm();
@@ -201,6 +209,13 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
                 </div>
               </div>
             </div>
+
+            <GuardSettingsForm
+              disponibleGuardia={disponibleGuardia}
+              setDisponibleGuardia={setDisponibleGuardia}
+              horarioGuardia={horarioGuardia}
+              setHorarioGuardia={setHorarioGuardia}
+            />
 
             <button
               type="submit"
