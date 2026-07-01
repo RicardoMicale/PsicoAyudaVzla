@@ -42,9 +42,9 @@ export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateTo
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {vols.map((vol) => (
-        <div 
-          key={vol.id} 
-          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md hover:shadow-lg hover:scale-[1.01] transition-all flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800 border-l-4 border-l-emerald-500"
+        <div
+          key={vol.id}
+          className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-md hover:shadow-lg hover:scale-[1.01] transition-all flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800"
         >
           <div>
             {/* Status badge & Icon */}
@@ -63,7 +63,6 @@ export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateTo
 
             <h3 className="text-lg font-bold text-slate-950 dark:text-white leading-snug">{vol.nombre}</h3>
             <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-1 uppercase tracking-wider">{vol.especialidad}</p>
-            <p className="text-xs text-slate-400 mt-1 dark:text-slate-500">Voluntario Autorizado</p>
           </div>
 
           {/* Call Action buttons */}
