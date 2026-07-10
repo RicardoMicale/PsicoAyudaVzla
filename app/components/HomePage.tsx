@@ -35,7 +35,7 @@ export default function HomePage({ children }: HomePageProps) {
   const activeTabDetails = navigationItems.find(item => item.path === pathname) || navigationItems[0];
 
   const handleBannerAction = () => {
-    router.push("/");
+    router.push("/directorio");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -43,13 +43,13 @@ export default function HomePage({ children }: HomePageProps) {
   const getSectionTitle = () => {
     switch (pathname) {
       case "/":
+        return content.general.title;
+      case "/guardias":
         return "Guardias Activas (Atención Inmediata)";
       case "/directorio":
         return "Directorio de Voluntarios";
       case "/grupos":
         return "Grupos de Apoyo Mutuo";
-      case "/diagnostico":
-        return content.diagnosticoRapido.title;
       case "/reacciones":
         return content.reaccionesSismo.title;
       case "/alertas":
@@ -66,13 +66,13 @@ export default function HomePage({ children }: HomePageProps) {
   const getSectionSubtitle = () => {
     switch (pathname) {
       case "/":
+        return content.general.slogan;
+      case "/guardias":
         return "Profesionales de la salud mental disponibles en este momento para brindarte primeros auxilios psicológicos gratuitos mediante llamada telefónica o WhatsApp.";
       case "/directorio":
-        return content.diagnosticoRapido.subtitle;
+        return "Busca y contacta directamente a nuestros profesionales de la salud mental voluntarios.";
       case "/grupos":
         return "Encuentra comunidades y círculos guiados por psicólogos especializados, tanto online como presenciales en Venezuela.";
-      case "/diagnostico":
-        return content.diagnosticoRapido.subtitle;
       case "/reacciones":
         return content.reaccionesSismo.subtitle;
       case "/alertas":

@@ -30,9 +30,9 @@ export default function GroupsFilter({ grupos, setGrupos, originalGrupos }: Grou
 
   return (
     <div className="flex gap-4">
-      <label htmlFor="prescencial" className="font-semibold text-white flex gap-1"><input type="checkbox" value={'presencial'} onChange={handleFilter} id="presencial" /><span>Presencial</span></label>
-      <label htmlFor="online" className="font-semibold text-white flex gap-1"><input type="checkbox" value={'online'} onChange={handleFilter} id="online" /><span>En linea</span></label>
-      <label htmlFor="mixto" className="font-semibold text-white flex gap-1"><input type="checkbox" value={'mixto'} onChange={handleFilter} id="mixto" /><span>Mixto</span></label>
+      <label htmlFor="prescencial" className="font-semibold text-slate-700 dark:text-slate-400 flex gap-1"><input type="checkbox" value={'presencial'} onChange={handleFilter} id="presencial" /><span>Presencial</span></label>
+      <label htmlFor="online" className="font-semibold text-slate-700 dark:text-slate-400 flex gap-1"><input type="checkbox" value={'online'} onChange={handleFilter} id="online" /><span>En linea</span></label>
+      <label htmlFor="mixto" className="font-semibold text-slate-700 dark:text-slate-400 flex gap-1"><input type="checkbox" value={'mixto'} onChange={handleFilter} id="mixto" /><span>Mixto</span></label>
     </div>
   )
 }

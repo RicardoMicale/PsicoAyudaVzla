@@ -4,7 +4,7 @@ import { AppProvider } from "./components/AppContext";
 import HomePage from "./components/HomePage";
 
 export const metadata: Metadata = {
-  title: "PsicoAyudaVenezuela | Soporte Psicológico Gratuito y Profesional",
+  title: "PsicoAyudaCUMIS | Soporte Psicológico Gratuito y Profesional",
   description: "Plataforma de soporte y orientación psicológica gratuita y confidencial para todos los venezolanos en momentos de crisis, duelo, pánico y ansiedad.",
   keywords: ["psicologia", "ayuda gratis", "venezuela", "salud mental", "ansiedad", "ataque de panico", "duelo", "sismo", "emergencia psicologica"],
 };

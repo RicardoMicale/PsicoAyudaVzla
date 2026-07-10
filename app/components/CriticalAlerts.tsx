@@ -12,13 +12,12 @@ export default function CriticalAlerts() {
       {/* Severity Card grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {levels.map((lvl, idx) => (
-          <div 
-            key={idx} 
-            className={`bg-white border rounded-2xl p-6 shadow-sm dark:bg-slate-900 ${
-              lvl.color === "red" 
-                ? "border-red-200 dark:border-red-950 border-t-4 border-t-red-600" 
-                : "border-amber-200 dark:border-amber-950 border-t-4 border-t-amber-500"
-            }`}
+          <div
+            key={idx}
+            className={`bg-white border rounded-2xl p-6 shadow-sm dark:bg-slate-900 ${lvl.color === "red"
+              ? "dark:border-red-950 border-red-600"
+              : "dark:border-amber-950 border-amber-500"
+              }`}
           >
             <div className="flex items-center gap-2 mb-4">
               <span className={`h-2.5 w-2.5 rounded-full ${lvl.color === "red" ? "bg-red-600" : "bg-amber-500"}`} />

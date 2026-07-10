@@ -31,7 +31,7 @@ export default function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <Link href="/" onClick={onClose} className="flex items-center gap-2">
               <HeartHandshake className="h-5 w-5 text-emerald-400" />
-              <span className="font-extrabold text-base">PsicoAyudaVE</span>
+              <span className="font-extrabold text-base">PsicoAyudaCUMIS</span>
             </Link>
             <button
               onClick={onClose}

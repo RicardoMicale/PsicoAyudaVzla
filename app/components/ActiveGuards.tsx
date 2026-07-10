@@ -7,10 +7,10 @@ import { Voluntario } from "../models";
 interface ActiveGuardsProps {
   vols: Voluntario[];
   onNavigateToDirectory: () => void;
-  onNavigateToDiagnostic: () => void;
+  onNavigateToHome: () => void;
 }
 
-export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateToDiagnostic }: ActiveGuardsProps) {
+export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateToHome }: ActiveGuardsProps) {
   if (vols.length === 0) {
     return (
       <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto my-8 dark:bg-slate-900 dark:border-slate-800">
@@ -29,10 +29,10 @@ export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateTo
             Buscar en el Directorio Completo
           </button>
           <button
-            onClick={onNavigateToDiagnostic}
+            onClick={onNavigateToHome}
             className="px-4 py-2 border border-slate-300 text-slate-700 bg-white font-semibold rounded-lg hover:bg-slate-50 text-sm transition-colors dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
           >
-            Ver Guía de Auto-Regulación
+            Volver al Inicio
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function ActiveGuards({ vols, onNavigateToDirectory, onNavigateTo
               Llamar
             </a>
             <a
-              href={`https://wa.me/${vol.whatsapp}?text=Hola%20${encodeURIComponent(vol.nombre)},%20te%20contacto%20desde%20PsicoAyudaVenezuela.%20Necesito%20soporte%20psicológico.`}
+              href={`https://wa.me/${vol.whatsapp}?text=Hola%20${encodeURIComponent(vol.nombre)},%20te%20contacto%20desde%20PsicoAyuda%20CUMIS.%20Necesito%20soporte%20psicológico.`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-2.5 text-sm font-semibold text-white shadow-sm shadow-emerald-600/10 transition-colors"

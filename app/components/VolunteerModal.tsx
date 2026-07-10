@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X } from "lucide-react";
 import { registerVoluntario } from "../lib/auth";
 import { useApp } from "./AppContext";
-import GuardSettingsForm from "./GuardSettingsForm";
-import { HorarioGuardia } from "../models";
 
 interface VolunteerModalProps {
   isOpen: boolean;
@@ -22,9 +20,6 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
   const [telefono, setTelefono] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
 
-  const [disponibleGuardia, setDisponibleGuardia] = useState(false);
-  const [horarioGuardia, setHorarioGuardia] = useState<HorarioGuardia[]>([]);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -38,8 +33,6 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setEspecialidad("");
     setTelefono("");
     setWhatsapp("");
-    setHorarioGuardia([]);
-    setDisponibleGuardia(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,7 +49,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setError(null);
 
     try {
-      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, horarioGuardia);
+      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, []);
       await refreshVoluntarios();
       setSuccess("Registro completado con exito. Ya quedo guardada la informacion del voluntario.");
       resetForm();
@@ -210,12 +203,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
               </div>
             </div>
 
-            <GuardSettingsForm
-              disponibleGuardia={disponibleGuardia}
-              setDisponibleGuardia={setDisponibleGuardia}
-              horarioGuardia={horarioGuardia}
-              setHorarioGuardia={setHorarioGuardia}
-            />
+
 
             <button
               type="submit"

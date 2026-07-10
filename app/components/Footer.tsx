@@ -15,13 +15,13 @@ export default function Footer({ disclaimer, credits }: FooterProps) {
         <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
           <div className="flex items-center gap-2">
             <HeartHandshake className="h-5 w-5 text-emerald-500" />
-            <span className="font-extrabold text-sm text-slate-950 dark:text-white tracking-tight">PsicoAyudaVenezuela</span>
+            <span className="font-extrabold text-sm text-slate-950 dark:text-white tracking-tight">PsicoAyudaCUMIS</span>
           </div>
           <p className="text-[10px] text-slate-400 dark:text-slate-500">
             {credits}
           </p>
         </div>
-        
+
         <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed border-t border-slate-100 dark:border-slate-900 pt-4">
           {disclaimer}
         </p>

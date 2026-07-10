@@ -1,6 +1,6 @@
 import {
-  Activity, Users, HeartHandshake, BookOpen, Brain,
-  AlertTriangle, Heart, Sparkles
+  Activity, Users, HeartHandshake, Brain,
+  AlertTriangle, Heart, Sparkles, Home
 } from "lucide-react";
 import { NavigationItem } from "./models";
 
@@ -11,12 +11,11 @@ export interface RouteItem extends Omit<NavigationItem, "icon"> {
 
 export const getNavigationItems = (hasActiveGuard: boolean, groupCount: number): RouteItem[] => [
   {
-    id: "guardia",
+    id: "inicio",
     path: "/",
-    label: "Guardias Activas",
-    icon: Activity,
-    description: "Atención inmediata en línea",
-    badge: hasActiveGuard ? "En línea" : null
+    label: "Inicio",
+    icon: Home,
+    description: "Bienvenida y presentación"
   },
   {
     id: "directorio",
@@ -32,13 +31,6 @@ export const getNavigationItems = (hasActiveGuard: boolean, groupCount: number):
     icon: HeartHandshake,
     description: "Comunidades guiadas",
     badge: groupCount > 0 ? `${groupCount}` : null
-  },
-  {
-    id: "diagnostico",
-    path: "/diagnostico",
-    label: "Guía de Diagnóstico",
-    icon: BookOpen,
-    description: "Ansiedad, Pánico, Duelo..."
   },
   {
     id: "reacciones",
@@ -64,7 +56,7 @@ export const getNavigationItems = (hasActiveGuard: boolean, groupCount: number):
   {
     id: "habitos",
     path: "/habitos",
-    label: "Hábitos Saludables",
+    label: "Hábitos Psicobiológicos",
     icon: Sparkles,
     description: "Estabilidad y autocuidado"
   },
