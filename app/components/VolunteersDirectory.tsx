@@ -101,7 +101,9 @@ export default function VolunteersDirectory({ voluntarios }: VolunteersDirectory
               <div className="flex justify-between items-start gap-4">
                 <div className="space-y-1">
                   <h3 className="font-bold text-base text-slate-950 dark:text-white leading-tight">{vol.nombre}</h3>
-                  <p className="text-xs text-slate-400 dark:text-slate-500">Especialista Autorizado</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">
+                    Especialista Autorizado {vol.numeroFVP && `| FVP: ${vol.numeroFVP}`}
+                  </p>
                   <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md inline-block mt-2">
                     {vol.especialidad}
                   </p>

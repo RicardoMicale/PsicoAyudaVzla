@@ -38,6 +38,7 @@ export async function GET() {
         horarios: voluntario.horarios,
         sesionesGratis: Number(voluntario.sesionesGratis ?? 3),
         montoSesion: Number(voluntario.montoSesion ?? 0),
+        numeroFVP: voluntario.numeroFVP ?? "",
       }))
     );
   } catch (error) {
@@ -62,8 +63,9 @@ export async function POST(request: Request) {
     const horarios = (body.horarios ?? []) as { dias: number; horarioInicio: string; horarioFin: string }[];
     const sesionesGratis = body.sesionesGratis !== undefined ? Number(body.sesionesGratis) : 3;
     const montoSesion = body.montoSesion !== undefined ? Number(body.montoSesion) : 0;
+    const numeroFVP = String(body.numeroFVP ?? "").trim();
 
-    if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp) {
+    if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp || !numeroFVP) {
       return NextResponse.json(
         { message: "Todos los campos del registro son obligatorios." },
         { status: 400 }
@@ -92,6 +94,7 @@ export async function POST(request: Request) {
       horarios,
       sesionesGratis,
       montoSesion,
+      numeroFVP,
     });
 
     return NextResponse.json(
@@ -108,6 +111,7 @@ export async function POST(request: Request) {
         horarios: newVoluntario.horarios,
         sesionesGratis: newVoluntario.sesionesGratis,
         montoSesion: newVoluntario.montoSesion,
+        numeroFVP: newVoluntario.numeroFVP,
       },
       { status: 201 }
     );

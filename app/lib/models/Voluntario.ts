@@ -14,6 +14,7 @@ const voluntarioSchema = new Schema(
     horarios: { type: [horarioGuardiaSchema], default: [] },
     sesionesGratis: { type: Number, default: 3, min: [3, "El mínimo de sesiones gratuitas es 3"] },
     montoSesion: { type: Number, default: 0 },
+    numeroFVP: { type: String, required: [true, "El número de FVP es obligatorio"], trim: true },
   },
   {
     timestamps: true,

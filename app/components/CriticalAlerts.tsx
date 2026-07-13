@@ -48,7 +48,7 @@ export default function CriticalAlerts() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Protocol Steps list */}
           <div className="space-y-4">
-            {protocol.steps.slice(0, 3).map((step, idx) => (
+            {protocol.steps.slice(0, 2).map((step, idx) => (
               <div key={idx} className="flex gap-4 items-start">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
                   {idx + 1}
@@ -66,10 +66,10 @@ export default function CriticalAlerts() {
           </div>
 
           <div className="space-y-4">
-            {protocol.steps.slice(3).map((step, idx) => (
+            {protocol.steps.slice(2).map((step, idx) => (
               <div key={idx} className="flex gap-4 items-start">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
-                  {idx + 4}
+                  {idx + 3}
                 </span>
                 <p className="text-xs text-slate-300 leading-relaxed pt-0.5">
                   {step.startsWith("**") ? (
