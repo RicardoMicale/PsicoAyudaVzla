@@ -45,7 +45,8 @@ export type SectionType =
   | "reacciones"
   | "alertas"
   | "duelo"
-  | "habitos";
+  | "habitos"
+  | "inicio";
 
 export interface NavigationItem {
   id: SectionType;
