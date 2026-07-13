@@ -36,6 +36,8 @@ export async function GET() {
         guardiaActiva: Boolean(voluntario.guardiaActiva),
         autorizado: Boolean(voluntario.autorizado),
         horarios: voluntario.horarios,
+        sesionesGratis: Number(voluntario.sesionesGratis ?? 3),
+        montoSesion: Number(voluntario.montoSesion ?? 0),
       }))
     );
   } catch (error) {
@@ -58,6 +60,8 @@ export async function POST(request: Request) {
     const telefono = String(body.telefono ?? "").trim();
     const whatsapp = normalizeWhatsApp(String(body.whatsapp ?? "").trim());
     const horarios = (body.horarios ?? []) as { dias: number; horarioInicio: string; horarioFin: string }[];
+    const sesionesGratis = body.sesionesGratis !== undefined ? Number(body.sesionesGratis) : 3;
+    const montoSesion = body.montoSesion !== undefined ? Number(body.montoSesion) : 0;
 
     if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp) {
       return NextResponse.json(
@@ -86,6 +90,8 @@ export async function POST(request: Request) {
       guardiaActiva: false,
       autorizado: true,
       horarios,
+      sesionesGratis,
+      montoSesion,
     });
 
     return NextResponse.json(
@@ -100,6 +106,8 @@ export async function POST(request: Request) {
         guardiaActiva: newVoluntario.guardiaActiva,
         autorizado: newVoluntario.autorizado,
         horarios: newVoluntario.horarios,
+        sesionesGratis: newVoluntario.sesionesGratis,
+        montoSesion: newVoluntario.montoSesion,
       },
       { status: 201 }
     );

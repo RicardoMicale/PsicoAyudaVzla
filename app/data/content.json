@@ -1,10 +1,12 @@
 {
   "general": {
-    "title": "PsicoAyudaVenezuela",
+    "textoGeneral1": "Cuando la tierra se mueve a todos se nos cae algo por dentro, fracturando la estabilidad y la confianza en el suelo que pisamos. En CUMIS, tras años recorriendo y sirviendo a las comunidades más vulnerables de toda Venezuela, hoy unimos fuerzas con propósito colectivo: acompañar a Caracas y La Guaira a procesar lo vivido el pasado 24 de junio. El impacto de un sismo no solo se queda en las estructuras, sino también en la forma en que nos contamos lo que pasó y cómo nos vemos a nosotros mismos y al otro ante la incertidumbre.",
+    "textoGeneral2": "Queremos ayudarte a encontrar las palabras para procesar esta historia y empezar a construir, a tu propio ritmo, una narrativa de tranquilidad y esperanza. Para ello, ponemos a tu disposición un directorio de psicólogos y psiquiatras que ofrecen 3 sesiones de apoyo psicológico individual sin costo, así como sesiones grupales pensadas para entrelazar nuestras vivencias y formar un tejido social de reconstrucción. No tienes que transitar este camino a solas; aquí estamos para sostenernos",
+    "title": "PsicoAyudaCUMIS",
     "slogan": "Soporte psicológico gratuito, confidencial y profesional para todos los venezolanos.",
     "emergencyBanner": {
-      "text": "ATENCIÓN: Si te encuentras en una situación de crisis extrema, pensamientos de hacerte daño o una emergencia psiquiátrica inminente, por favor ponte en contacto inmediato con nuestros profesionales de guardia.",
-      "action": "Ver Guardia Activa"
+      "text": "ATENCIÓN: Si necesitas orientación o soporte primario ante crisis, pánico o ansiedad, por favor ponte en contacto con los especialistas de nuestro directorio de voluntarios.",
+      "action": "Ver Directorio de Voluntarios"
     },
     "volunteerButton": {
       "register": "Registrarse como Voluntario",
@@ -17,7 +19,7 @@
     },
     "footer": {
       "disclaimer": "Aviso Médico Legal: La información y la orientación brindadas en esta plataforma tienen fines educativos y de soporte primario. No reemplazan una terapia psicológica formal ni un tratamiento médico o psiquiátrico de urgencia. Si tu vida corre peligro, acude al centro de salud más cercano o llama a los servicios de emergencia de tu localidad.",
-      "credits": "© 2026 PsicoAyudaVenezuela. Desarrollado con vocación de servicio público y apoyo mutuo."
+      "credits": "© 2026 PsicoAyudaCUMIS. Desarrollado con vocación de servicio público y apoyo mutuo."
     }
   },
   "diagnosticoRapido": {
@@ -188,7 +190,7 @@
     ]
   },
   "habitosSaludables": {
-    "title": "Hábitos Saludables y Autocuidado",
+    "title": "Hábitos Psicobiológicos y Autocuidado",
     "subtitle": "Pequeñas acciones diarias que fortalecen tu salud mental de forma autónoma y previenen el colapso emocional.",
     "items": [
       {

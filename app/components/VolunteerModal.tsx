@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X } from "lucide-react";
+import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X, Sparkles, DollarSign } from "lucide-react";
 import { registerVoluntario } from "../lib/auth";
 import { useApp } from "./AppContext";
-import GuardSettingsForm from "./GuardSettingsForm";
-import { HorarioGuardia } from "../models";
 
 interface VolunteerModalProps {
   isOpen: boolean;
@@ -21,9 +19,8 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
   const [especialidad, setEspecialidad] = useState("");
   const [telefono, setTelefono] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-
-  const [disponibleGuardia, setDisponibleGuardia] = useState(false);
-  const [horarioGuardia, setHorarioGuardia] = useState<HorarioGuardia[]>([]);
+  const [sesionesGratis, setSesionesGratis] = useState(3);
+  const [montoSesion, setMontoSesion] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,8 +35,8 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setEspecialidad("");
     setTelefono("");
     setWhatsapp("");
-    setHorarioGuardia([]);
-    setDisponibleGuardia(false);
+    setSesionesGratis(3);
+    setMontoSesion(0);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,11 +49,16 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
       return;
     }
 
+    if (sesionesGratis < 3) {
+      setError("El mínimo de sesiones gratuitas es 3.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, horarioGuardia);
+      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, [], sesionesGratis, montoSesion);
       await refreshVoluntarios();
       setSuccess("Registro completado con exito. Ya quedo guardada la informacion del voluntario.");
       resetForm();
@@ -210,12 +212,50 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
               </div>
             </div>
 
-            <GuardSettingsForm
-              disponibleGuardia={disponibleGuardia}
-              setDisponibleGuardia={setDisponibleGuardia}
-              horarioGuardia={horarioGuardia}
-              setHorarioGuardia={setHorarioGuardia}
-            />
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-4 space-y-1">
+              <span className="block text-xs font-bold text-slate-400 uppercase tracking-wider">Sesiones y Costos</span>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Nota: recuerda que hay un mínimo de 3 sesiones de apoyo psicológico sin costo.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  Sesiones Gratuitas (Mínimo 3)
+                </label>
+                <div className="relative">
+                  <Sparkles className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
+                  <input
+                    type="number"
+                    min="3"
+                    value={sesionesGratis}
+                    onChange={(e) => setSesionesGratis(Math.max(3, parseInt(e.target.value) || 3))}
+                    placeholder="3"
+                    className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  Monto por Sesión Adicional
+                </label>
+                <div className="relative">
+                  <DollarSign className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
+                  <input
+                    type="number"
+                    min="0"
+                    value={montoSesion}
+                    onChange={(e) => setMontoSesion(Math.max(0, parseInt(e.target.value) || 0))}
+                    placeholder="0"
+                    className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
 
             <button
               type="submit"

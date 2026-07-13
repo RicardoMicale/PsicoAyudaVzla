@@ -67,7 +67,7 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
   return (
     <>
       <button
-        className="p-3 text-white bg-emerald-600 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-emerald-700 hover:scale-105 cursor-pointer transition-all duration-200 mb-6"
+        className="p-3 text-white bg-emerald-600 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-emerald-700 hover:scale-105 cursor-pointer transition-all duration-200 mb-2"
         onClick={() => setIsAddGroupModalOpen(true)}
       >
         Crear grupo
@@ -75,7 +75,7 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
       </button>
 
       <GroupsFilter grupos={grps} setGrupos={setGrps} originalGrupos={grupos} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn mt-2">
         {grps.map((grp) => (
           <div
             key={grp.id}

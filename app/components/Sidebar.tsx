@@ -26,7 +26,7 @@ export default function Sidebar() {
           </div>
           <div>
             <h1 className="font-extrabold text-lg tracking-tight text-white leading-tight">
-              PsicoAyuda<span className="text-emerald-400">VE</span>
+              PsicoAyuda<span className="text-emerald-400">CUMIS</span>
             </h1>
             <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Soporte Gratuito</span>
           </div>

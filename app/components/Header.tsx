@@ -12,7 +12,7 @@ export default function Header() {
     <header className="md:hidden bg-slate-900 text-white px-4 py-4 border-b border-slate-800 flex items-center justify-between sticky top-[44px] z-30">
       <div className="flex items-center gap-2">
         <HeartHandshake className="h-5 w-5 text-emerald-400" />
-        <span className="font-extrabold tracking-tight text-base">PsicoAyudaVE</span>
+        <span className="font-extrabold tracking-tight text-base">PsicoAyudaCUMIS</span>
       </div>
 
       <div className="flex items-center gap-2">
