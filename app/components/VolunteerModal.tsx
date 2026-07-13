@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X, Sparkles, DollarSign } from "lucide-react";
+import { Check, Activity, HeartHandshake, Mail, Phone, Shield, User, X, Sparkles, DollarSign, Hash } from "lucide-react";
 import { registerVoluntario } from "../lib/auth";
 import { useApp } from "./AppContext";
 
@@ -21,6 +21,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
   const [whatsapp, setWhatsapp] = useState("");
   const [sesionesGratis, setSesionesGratis] = useState(3);
   const [montoSesion, setMontoSesion] = useState(0);
+  const [numeroFVP, setNumeroFVP] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,6 +38,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setWhatsapp("");
     setSesionesGratis(3);
     setMontoSesion(0);
+    setNumeroFVP("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +46,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
 
     if (loading) return;
 
-    if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp) {
+    if (!nombre || !apellido || !email || !especialidad || !telefono || !whatsapp || !numeroFVP) {
       setError("Por favor, completa todos los campos del registro.");
       return;
     }
@@ -58,7 +60,7 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
     setError(null);
 
     try {
-      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, [], sesionesGratis, montoSesion);
+      await registerVoluntario(nombre, apellido, email, especialidad, telefono, whatsapp, [], sesionesGratis, montoSesion, numeroFVP);
       await refreshVoluntarios();
       setSuccess("Registro completado con exito. Ya quedo guardada la informacion del voluntario.");
       resetForm();
@@ -153,6 +155,23 @@ export default function VolunteerModal({ isOpen, onClose }: VolunteerModalProps)
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="correo@ejemplo.com"
+                  className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                Número de FVP (Federación Venezolana de Psicólogos)
+              </label>
+              <div className="relative">
+                <Hash className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
+                <input
+                  type="text"
+                  value={numeroFVP}
+                  onChange={(e) => setNumeroFVP(e.target.value)}
+                  placeholder="FVP-12345"
                   className="w-full rounded-lg border border-slate-200 bg-white pl-10 pr-3.5 py-2 text-sm text-slate-900 focus:border-emerald-500 focus:outline-none dark:border-slate-800 dark:bg-slate-950 dark:text-white"
                   required
                 />

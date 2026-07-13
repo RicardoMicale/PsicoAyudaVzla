@@ -137,7 +137,6 @@
         "signs": [
           "Ideas, planes o intentos activos de autolesión o suicidio.",
           "Agresividad severa, descontrol de impulsos o violencia hacia terceros.",
-          "Alucinaciones (escuchar o ver cosas que otros no perciben).",
           "Desconexión total de la realidad o mutismo selectivo prolongado."
         ]
       },
@@ -157,7 +156,6 @@
       "steps": [
         "**Mantén la calma y acompaña:** No dejes sola a la persona que atraviesa la crisis.",
         "**Escucha activa sin juzgar:** Evita dar sermones, minimizar su dolor o desafiar sus ideas.",
-        "**Busca a nuestros Profesionales de Guardia:** Ve a la pestaña 'Guardias Activas' y contacta a un psicólogo disponible inmediatamente por llamada o WhatsApp.",
         "**Retira objetos de peligro:** Asegura el entorno retirando medicamentos, armas, cuerdas u objetos cortantes.",
         "**Acude a un centro asistencial:** Si la persona está fuera de control o se ha autolesionado, trasládala de inmediato al área de emergencias del hospital más cercano."
       ]
@@ -175,7 +173,7 @@
       {
         "dimension": "Dimensión Cognitiva",
         "icon": "HelpCircle",
-        "desc": "Suelen aparecer pensamientos de incredulidad ('esto no puede ser real'), confusión, dificultades de memoria, alucinaciones breves (creer ver u oír al fallecido) y rumiación mental."
+        "desc": "Suelen aparecer pensamientos de incredulidad ('esto no puede ser real'), confusión y rumiación mental."
       },
       {
         "dimension": "Dimensión Emocional",

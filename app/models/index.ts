@@ -19,6 +19,7 @@ export interface Voluntario {
   horarios: HorarioGuardia[];
   sesionesGratis: number;
   montoSesion: number;
+  numeroFVP: string;
 }
 
 export interface GrupoApoyo {

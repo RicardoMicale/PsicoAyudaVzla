@@ -10,7 +10,8 @@ export const registerVoluntario = async (
   whatsapp: string,
   horarioGuardia: HorarioGuardia[],
   sesionesGratis: number,
-  montoSesion: number
+  montoSesion: number,
+  numeroFVP: string
 ): Promise<Voluntario> => {
   const response = await fetch("/api/voluntarios", {
     method: "POST",
@@ -27,6 +28,7 @@ export const registerVoluntario = async (
       horarios: horarioGuardia,
       sesionesGratis,
       montoSesion,
+      numeroFVP: numeroFVP.trim(),
     }),
   });
 
