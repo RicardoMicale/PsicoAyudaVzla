@@ -17,6 +17,8 @@ export interface Voluntario {
   guardiaActiva: boolean;
   autorizado: boolean;
   horarios: HorarioGuardia[];
+  sesionesGratis: number;
+  montoSesion: number;
 }
 
 export interface GrupoApoyo {

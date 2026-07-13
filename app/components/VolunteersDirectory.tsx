@@ -23,17 +23,17 @@ export default function VolunteersDirectory({ voluntarios }: VolunteersDirectory
 
   const filteredVoluntarios = voluntarios.filter(v => {
     if (!v.autorizado) return false;
-    const matchesSearch = 
+    const matchesSearch =
       v.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
       v.especialidad.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     if (selectedSpecialty === "Todos") return matchesSearch;
-    
+
     if (selectedSpecialty === "Ansiedad") return matchesSearch && v.especialidad.toLowerCase().includes("ansiedad");
     if (selectedSpecialty === "Crisis") return matchesSearch && v.especialidad.toLowerCase().includes("crisis");
     if (selectedSpecialty === "Duelo") return matchesSearch && v.especialidad.toLowerCase().includes("duelo");
     if (selectedSpecialty === "Sueño") return matchesSearch && (v.especialidad.toLowerCase().includes("sueño") || v.especialidad.toLowerCase().includes("insomnio"));
-    
+
     return matchesSearch && v.especialidad === selectedSpecialty;
   });
 
@@ -41,7 +41,7 @@ export default function VolunteersDirectory({ voluntarios }: VolunteersDirectory
     <div className="flex-1 flex flex-col space-y-6 animate-fadeIn">
       {/* Search & Specialty Filter Layout */}
       <div className="bg-white border border-slate-200 rounded-2xl p-5 dark:bg-slate-900 dark:border-slate-800 shadow-sm space-y-4">
-        
+
         {/* Search text input */}
         <div className="relative">
           <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
@@ -94,8 +94,8 @@ export default function VolunteersDirectory({ voluntarios }: VolunteersDirectory
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredVoluntarios.map((vol) => (
-            <div 
-              key={vol.id} 
+            <div
+              key={vol.id}
               className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm dark:bg-slate-900 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-colors flex flex-col justify-between"
             >
               <div className="flex justify-between items-start gap-4">
@@ -105,6 +105,14 @@ export default function VolunteersDirectory({ voluntarios }: VolunteersDirectory
                   <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md inline-block mt-2">
                     {vol.especialidad}
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-2 text-[11px]">
+                    <span className="bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400 px-2.5 py-1 rounded-md font-medium border border-emerald-100 dark:border-emerald-900/30">
+                      {vol.sesionesGratis || 3} sesiones gratis
+                    </span>
+                    <span className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 px-2.5 py-1 rounded-md font-medium border border-slate-200/50 dark:border-slate-800">
+                      Costo: {vol.montoSesion > 0 ? `$${vol.montoSesion}` : "Sin costo / Voluntario"}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Guard indicator status badge */}

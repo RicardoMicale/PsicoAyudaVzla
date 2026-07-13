@@ -12,6 +12,8 @@ const voluntarioSchema = new Schema(
     guardiaActiva: { type: Boolean, default: false },
     autorizado: { type: Boolean, default: true },
     horarios: { type: [horarioGuardiaSchema], default: [] },
+    sesionesGratis: { type: Number, default: 3, min: [3, "El mínimo de sesiones gratuitas es 3"] },
+    montoSesion: { type: Number, default: 0 },
   },
   {
     timestamps: true,
