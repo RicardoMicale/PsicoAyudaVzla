@@ -16,10 +16,19 @@ export default function SupportGroups({ grupos }: SupportGroupsProps) {
 
   if (grupos.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 animate-fadeIn">
-        <h3 className="text-xl font-bold text-slate-950 dark:text-white">No hay grupos registrados</h3>
-        <span className="text-slate-500 dark:text-slate-400">Haz click en el boton de aquí arriba para registrar uno.</span>
-      </div>
+      <>
+        <button
+          className="p-3 text-white bg-emerald-600 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-emerald-700 hover:scale-105 cursor-pointer transition-all duration-200 mb-2"
+          onClick={() => setIsAddGroupModalOpen(true)}
+        >
+          Crear grupo
+          <PlusIcon className="h-4 w-4" />
+        </button>
+        <div className="flex flex-col items-center justify-center gap-4 animate-fadeIn">
+          <h3 className="text-xl font-bold text-slate-950 dark:text-white">No hay grupos registrados</h3>
+          <span className="text-slate-500 dark:text-slate-400">Haz click en el boton de aquí arriba para registrar uno.</span>
+        </div>
+      </>
     )
   }
 
